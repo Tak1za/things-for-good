@@ -1,0 +1,25 @@
+.register-main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .register-donator {
+    padding: 0px 100px;
+    flex: 50%;
+    height: calc(100vh - 50px);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .register-receiver {
+    padding: 0px 100px;
+    flex: 50%;
+    height: calc(100vh - 50px);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
