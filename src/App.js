@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { getUserProfileDocument, firebaseAuth } from "./firebase/init";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     firebaseAuth.onAuthStateChanged(async (userAuth) => {
@@ -32,7 +32,11 @@ function App() {
     <div className="App">
       <Navigation currentUser={currentUser} />
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route
+          exact
+          path="/"
+          render={() => <Home currentUser={currentUser} />}
+        />
         <Route
           path="/register"
           render={() => (!currentUser ? <Register /> : <Redirect to="/" />)}

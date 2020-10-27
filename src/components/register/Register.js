@@ -45,7 +45,7 @@ function Register() {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
             <Button variant="primary" type="submit">
-              <i class="fas fa-share-square"></i>Submit
+              <i className="fas fa-share-square"></i>Submit
             </Button>
             <Button
               variant="danger"

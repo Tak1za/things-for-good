@@ -1,0 +1,14 @@
+.address-complete-button {
+  margin-left: 10px;
+  border-radius: 50px;
+}
+
+.location-button {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-start;
+
+  .fa-compass {
+    margin: 4px 5px 0 0;
+  }
+}

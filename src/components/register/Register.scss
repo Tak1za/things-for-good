@@ -15,6 +15,9 @@
     .register-donator-container {
       padding: 20px;
       border-radius: 20px;
+      -webkit-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
+      -moz-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
+      box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
 
       .fa-share-square {
         margin-right: 5px;
@@ -27,12 +30,6 @@
           margin-right: 5px;
         }
       }
-    }
-
-    .register-donator-container:hover {
-      -webkit-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
-      -moz-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
-      box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
     }
   }
 
@@ -48,6 +45,9 @@
     .register-receiver-container {
       padding: 20px;
       border-radius: 20px;
+      -webkit-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
+      -moz-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
+      box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
 
       .fa-share-square {
         margin-right: 5px;
@@ -60,12 +60,6 @@
           margin-right: 5px;
         }
       }
-    }
-
-    .register-receiver-container:hover {
-      -webkit-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
-      -moz-box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
-      box-shadow: 0px 0px 78px 10px rgba(0, 0, 0, 0.29);
     }
   }
 
