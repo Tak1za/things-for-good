@@ -1,20 +1,36 @@
 .circle {
-    background: #d83b01;
-    border-radius: 50%;
-    color: #fff;
-    height: 4.5em;
-    position: relative;
-    width: 4.5em;
-  
-    border: 1px solid transparent;
-  }
-  
-  .circleText {
-    text-align: center;
-    height: 50%;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-  }
+  background: #d83b01;
+  border-radius: 50%;
+  color: #fff;
+  height: 4.5em;
+  position: relative;
+  width: 4.5em;
+
+  border: 1px solid transparent;
+}
+
+.circleText {
+  text-align: center;
+  height: 50%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+}
+
+.marker-container {
+  position: absolute;
+  width: 40;
+  height: 40;
+  left: -20;
+  top: -20;
+  background-color: white;
+  border-radius: 50px;
+  font-size: 25px;
+  color: red;
+}
+
+.marker-container:hover {
+    background-color: black;
+}

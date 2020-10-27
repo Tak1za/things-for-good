@@ -18,8 +18,18 @@ function Address(props) {
   const [address, setAddress] = useState("");
 
   const handleAddressComplete = () => {
-    let updatedLocations = props.allLocations.concat(address);
-    props.addLocations(updatedLocations);
+    Geocode.fromAddress(address)
+      .then((res) => {
+        const { lat, lng } = res.results[0].geometry.location;
+        let filteredAddress = {
+          address: res.results[0].formatted_address,
+          lat: lat,
+          lng: lng,
+        };
+        let updatedLocations = props.allLocations.concat(filteredAddress);
+        props.addLocations(updatedLocations);
+      })
+      .catch((err) => console.error("Error: ", err));
     setAddress("");
   };
 
