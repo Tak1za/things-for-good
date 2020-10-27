@@ -20,13 +20,6 @@ const firebaseFirestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-export const getUserProfileDocument = async (userAuth) => {
-  if (!userAuth) return;
-
-  const userReference = firebaseFirestore.doc(`users/${userAuth.uid}`);
-  return userReference;
-};
-
 const signInWithGoogle = () => firebaseAuth.signInWithPopup(provider);
 
 export { firebaseAuth, firebaseFirestore, signInWithGoogle };

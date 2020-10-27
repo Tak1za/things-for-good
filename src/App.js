@@ -4,7 +4,8 @@ import Home from "./components/home/Home";
 import Navigation from "./components/navigation/Navigation";
 import Register from "./components/register/Register";
 import React, { useState, useEffect } from "react";
-import { getUserProfileDocument, firebaseAuth } from "./firebase/init";
+import { firebaseAuth } from "./firebase/init";
+import { getUserProfileDocument } from "./firebase/functions";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
