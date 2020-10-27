@@ -9,7 +9,7 @@ function Home(props) {
   return (
     <div className="home-container">
       <div className="home-map-container">
-        <Map locations={locations} currentUser={props.currentUser}></Map>
+        <Map locations={locations} currentUser={props.currentUser} />
         <Address
           currentUser={props.currentUser}
           addLocations={setLocations}

@@ -7,18 +7,13 @@ import {
   Popover,
   FormControl,
 } from "react-bootstrap";
-import Geocode from "react-geocode";
-
-Geocode.setApiKey("AIzaSyAipWncoxprrnq5-QLWblUT4EpDNcb8YZ8");
-Geocode.setLanguage("en");
-Geocode.setRegion("IN");
-Geocode.enableDebug(true);
+import geocoder from '../../geocode/init';
 
 function Address(props) {
   const [address, setAddress] = useState("");
 
   const handleAddressComplete = () => {
-    Geocode.fromAddress(address)
+    geocoder.fromAddress(address)
       .then((res) => {
         const { lat, lng } = res.results[0].geometry.location;
         let filteredAddress = {
