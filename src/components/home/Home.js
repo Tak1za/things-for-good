@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
 import Address from "../address/Address";
 import Map from "../map/Map";
+import { allUserData } from "../../firebase/functions";
 
-function Home(props) {
+const fetchData = async () => {
+  const data = await allUserData();
+  let allData = data.docs
+    .filter((item) => {
+      if (item.data().location) {
+        return true;
+      }
+      return false;
+    })
+    .map((item) => item.data().location);
+  console.log(allData);
+  return allData;
+};
+
+function Home({ currentUser }) {
   const [locations, setLocations] = useState([]);
-  console.log(locations);
+
+  useEffect(() => {
+    fetchData()
+      .then((res) => setLocations(res))
+      .catch((err) => console.error(err));
+  }, [currentUser]);
+
   return (
     <div className="home-container">
       <div className="home-map-container">
-        <Map locations={locations} currentUser={props.currentUser} />
-        <Address
-          currentUser={props.currentUser}
-          addLocations={setLocations}
-          allLocations={locations}
-        />
+        <Map locations={locations} currentUser={currentUser} />
+        <Address currentUser={currentUser} allLocations={locations} />
       </div>
     </div>
   );

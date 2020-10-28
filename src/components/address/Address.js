@@ -7,22 +7,28 @@ import {
   Popover,
   FormControl,
 } from "react-bootstrap";
-import geocoder from '../../geocode/init';
+import geocoder from "../../geocode/init";
+import { updateUserLocation } from "../../firebase/functions";
 
 function Address(props) {
   const [address, setAddress] = useState("");
 
-  const handleAddressComplete = () => {
-    geocoder.fromAddress(address)
-      .then((res) => {
+  const handleAddLocation = () => {
+    geocoder
+      .fromAddress(address)
+      .then(async (res) => {
         const { lat, lng } = res.results[0].geometry.location;
-        let filteredAddress = {
+        let newLocation = {
+          writtenAddress: address,
           address: res.results[0].formatted_address,
           lat: lat,
           lng: lng,
+          locationType: props.currentUser.userType,
         };
-        let updatedLocations = props.allLocations.concat(filteredAddress);
-        props.addLocations(updatedLocations);
+        await updateUserLocation(
+          newLocation,
+          props.currentUser.id
+        ).catch((err) => console.error(err));
       })
       .catch((err) => console.error("Error: ", err));
     setAddress("");
@@ -44,7 +50,7 @@ function Address(props) {
             variant="success"
             className="address-complete-button"
             type="submit"
-            onClick={handleAddressComplete}
+            onClick={handleAddLocation}
           >
             <i className="fas fa-plus"></i>
           </Button>
@@ -53,13 +59,19 @@ function Address(props) {
     </Popover>
   );
 
-  return (
+  const overlay = (
     <OverlayTrigger trigger="click" placement="top" overlay={popover}>
       <Button variant="primary" className="location-button">
         <i className="far fa-compass" />
         Add
       </Button>
     </OverlayTrigger>
+  );
+
+  return (
+    <div>
+      {props.currentUser ? (props.currentUser.location ? null : overlay) : null}
+    </div>
   );
 }
 

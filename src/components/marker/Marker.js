@@ -1,19 +1,31 @@
 import React from "react";
 import "./Marker.scss";
 
-const MyMarker = ({ address, lat, lng, currentUser, onChildClick }) => {
+const MyMarker = ({
+  writtenAddress,
+  address,
+  lat,
+  lng,
+  locationType,
+  onChildClick,
+}) => {
+  let comp = null;
+  switch (locationType) {
+    case "donator":
+      comp = <i className="fas fa-hand-holding-medical" />;
+      break;
+    case "receiver":
+      comp = <i className="fas fa-satellite-dish" />;
+      break;
+    default:
+      comp = <i className="fas fa-map-marker-alt" />;
+  }
   return (
     <div
       className="marker-container"
-      onClick={() => onChildClick(address, lat, lng)}
+      onClick={() => onChildClick(writtenAddress, address, lat, lng)}
     >
-      {currentUser ? (
-        currentUser.userType === "donator" ? (
-          <i className="fas fa-hand-holding-medical" />
-        ) : (
-          <i className="fas fa-satellite-dish" />
-        )
-      ) : null}
+      {comp}
     </div>
   );
 };

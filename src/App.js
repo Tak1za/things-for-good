@@ -27,8 +27,6 @@ function App() {
     });
   }, []);
 
-  console.log("Current User: ", currentUser);
-
   return (
     <div className="App">
       <Navigation currentUser={currentUser} />
