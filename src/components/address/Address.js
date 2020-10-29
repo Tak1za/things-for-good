@@ -10,7 +10,7 @@ import {
 import geocoder from "../../geocode/init";
 import { updateUserLocation } from "../../firebase/functions";
 
-function Address(props) {
+function Address({currentUser}) {
   const [address, setAddress] = useState("");
 
   const handleAddLocation = () => {
@@ -23,11 +23,11 @@ function Address(props) {
           address: res.results[0].formatted_address,
           lat: lat,
           lng: lng,
-          locationType: props.currentUser.userType,
+          locationType: currentUser.userType,
         };
         await updateUserLocation(
           newLocation,
-          props.currentUser.id
+          currentUser.id
         ).catch((err) => console.error(err));
       })
       .catch((err) => console.error("Error: ", err));
@@ -70,7 +70,7 @@ function Address(props) {
 
   return (
     <div>
-      {props.currentUser ? (props.currentUser.location ? null : overlay) : null}
+      {currentUser ? (currentUser.location ? null : overlay) : null}
     </div>
   );
 }

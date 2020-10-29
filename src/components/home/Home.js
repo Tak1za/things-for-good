@@ -31,7 +31,7 @@ function Home({ currentUser }) {
     <div className="home-container">
       <div className="home-map-container">
         <Map locations={locations} currentUser={currentUser} />
-        <Address currentUser={currentUser} allLocations={locations} />
+        <Address currentUser={currentUser} />
       </div>
     </div>
   );

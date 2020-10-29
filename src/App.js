@@ -6,9 +6,11 @@ import Register from "./components/register/Register";
 import React, { useState, useEffect } from "react";
 import { firebaseAuth } from "./firebase/init";
 import { getUserProfileDocument } from "./firebase/functions";
+import NotificationToast from "./components/notification-toast/NotificationToast";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [showLoginNotif, setShowLoginNotif] = useState(false);
 
   useEffect(() => {
     firebaseAuth.onAuthStateChanged(async (userAuth) => {
@@ -21,14 +23,29 @@ function App() {
             ...snapshot.data(),
           });
         });
+        setShowLoginNotif(true);
       } else {
         setCurrentUser(null);
+        setShowLoginNotif(true);
       }
     });
   }, []);
 
   return (
     <div className="App">
+      {currentUser ? (
+        <NotificationToast
+          show={showLoginNotif}
+          close={setShowLoginNotif}
+          text={"You are now logged in"}
+        />
+      ) : (
+        <NotificationToast
+          show={showLoginNotif}
+          close={setShowLoginNotif}
+          text={"You have logged out"}
+        />
+      )}
       <Navigation currentUser={currentUser} />
       <Switch>
         <Route
