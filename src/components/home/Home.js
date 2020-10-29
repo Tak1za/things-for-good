@@ -13,7 +13,13 @@ const fetchData = async () => {
       }
       return false;
     })
-    .map((item) => item.data().location);
+    .map((item) => {
+      return{
+        ...item.data().location,
+        name: item.data().name,
+        email: item.data().email
+      }
+    });
   console.log(allData);
   return allData;
 };

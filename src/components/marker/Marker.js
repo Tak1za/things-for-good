@@ -1,16 +1,9 @@
 import React from "react";
 import "./Marker.scss";
 
-const MyMarker = ({
-  writtenAddress,
-  address,
-  lat,
-  lng,
-  locationType,
-  onChildClick,
-}) => {
+const MyMarker = ({ selectedLocation, onChildClick }) => {
   let comp = null;
-  switch (locationType) {
+  switch (selectedLocation.locationType) {
     case "donator":
       comp = <i className="fas fa-hand-holding-medical" />;
       break;
@@ -23,7 +16,7 @@ const MyMarker = ({
   return (
     <div
       className="marker-container"
-      onClick={() => onChildClick(writtenAddress, address, lat, lng)}
+      onClick={() => onChildClick(selectedLocation)}
     >
       {comp}
     </div>

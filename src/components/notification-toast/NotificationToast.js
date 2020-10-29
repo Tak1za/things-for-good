@@ -5,12 +5,7 @@ import { Toast } from "react-bootstrap";
 function NotificationToast({ show, close, text }) {
   return (
     <Toast
-      style={{
-        position: "absolute",
-        top: 0,
-        right: 0,
-        zIndex: 1000,
-      }}
+      className="notification-toast"
       onClose={() => close(false)}
       show={show}
       delay={5000}

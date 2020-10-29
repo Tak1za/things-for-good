@@ -4,6 +4,7 @@ import GoogleMap from "google-map-react";
 import MyMarker from "../marker/Marker";
 import ResetZoom from "../reset-zoom/ResetZoom";
 import YourLocation from "../your-location/YourLocation";
+import LocationModal from "../location-modal/LocationModal";
 
 function Map({ locations, currentUser }) {
   const [thisMap, setThisMap] = useState(null);
@@ -12,6 +13,8 @@ function Map({ locations, currentUser }) {
     lat: 0.0,
     lng: 0.0,
   });
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
   const getPosition = (map) => {
     console.log(map);
@@ -39,12 +42,11 @@ function Map({ locations, currentUser }) {
       });
   };
 
-  const _onChildClick = (writtenAddress, address, lat, lng) => {
-    thisMap.panTo({ lat, lng });
-    console.log(writtenAddress);
-    console.log(address);
-    console.log(lat);
-    console.log(lng);
+  const _onChildClick = (selectedLocation) => {
+    thisMap.panTo({ lat: selectedLocation.lat, lng: selectedLocation.lng });
+    Object.entries(selectedLocation).map((i, j) => console.log(i, j));
+    setSelectedLocation(selectedLocation);
+    setModalShow(true);
   };
 
   const createMapOptions = (maps) => {
@@ -86,52 +88,57 @@ function Map({ locations, currentUser }) {
   };
 
   return (
-    <GoogleMap
-      bootstrapURLKeys={{
-        key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-        language: "en",
-        region: "IN",
-      }}
-      yesIWantToUseGoogleMapApiInternals
-      onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-      zoom={4}
-      defaultCenter={{ lat: 28.408913, lng: 77.317787 }}
-      center={
-        locations.length !== 0
-          ? currentUser && currentUser.location
-            ? {
-                lat: currentUser.location.lat,
-                lng: currentUser.location.lng,
-              }
-            : { lat: locations[0].lat, lng: locations[0].lng }
-          : undefined
-      }
-      options={createMapOptions}
-    >
-      {locations.length === 0
-        ? ""
-        : locations.map((location) => (
-            <MyMarker
-              key={location.address}
-              address={location.address}
-              writtenAddress={location.writtenAddress}
-              lat={location.lat}
-              lng={location.lng}
-              locationType={location.locationType}
-              onChildClick={_onChildClick}
-            />
-          ))}
-      {yourLocation.show ? (
-        <MyMarker
-          address={"Your location"}
-          writtenAddress={"Your location"}
-          onChildClick={_onChildClick}
-          lat={yourLocation.lat}
-          lng={yourLocation.lng}
-          locationType={"your-location"}
-        />
-      ) : null}
-    </GoogleMap>
+    <>
+      <GoogleMap
+        bootstrapURLKeys={{
+          key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+          language: "en",
+          region: "IN",
+        }}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+        zoom={15}
+        defaultCenter={{ lat: 28.408913, lng: 77.317787 }}
+        center={
+          locations.length !== 0
+            ? currentUser && currentUser.location
+              ? {
+                  lat: currentUser.location.lat,
+                  lng: currentUser.location.lng,
+                }
+              : { lat: locations[0].lat, lng: locations[0].lng }
+            : undefined
+        }
+        options={createMapOptions}
+      >
+        {locations.length === 0
+          ? ""
+          : locations.map((location) => (
+              <MyMarker
+                key={location.address}
+                selectedLocation={location}
+                lat={location.lat}
+                lng={location.lng}
+                onChildClick={_onChildClick}
+              />
+            ))}
+        {yourLocation.show ? (
+          <MyMarker
+            address={"Your location"}
+            writtenAddress={"Your location"}
+            onChildClick={_onChildClick}
+            lat={yourLocation.lat}
+            lng={yourLocation.lng}
+            locationType={"your-location"}
+          />
+        ) : null}
+      </GoogleMap>
+      <LocationModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        selectedlocation={selectedLocation}
+      />
+    </>
   );
 }
 
