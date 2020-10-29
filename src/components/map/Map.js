@@ -88,7 +88,7 @@ function Map({ locations, currentUser }) {
   return (
     <GoogleMap
       bootstrapURLKeys={{
-        key: "AIzaSyAipWncoxprrnq5-QLWblUT4EpDNcb8YZ8",
+        key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         language: "en",
         region: "IN",
       }}
