@@ -4,7 +4,7 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBKJ-PzNXzaR-qJkmQ4CEG4ajI9v0PDhQg",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "things-for-good-93e82.firebaseapp.com",
   databaseURL: "https://things-for-good-93e82.firebaseio.com",
   projectId: "things-for-good-93e82",

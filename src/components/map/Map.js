@@ -94,7 +94,7 @@ function Map({ locations, currentUser }) {
       }}
       yesIWantToUseGoogleMapApiInternals
       onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-      zoom={15}
+      zoom={4}
       defaultCenter={{ lat: 28.408913, lng: 77.317787 }}
       center={
         locations.length !== 0
