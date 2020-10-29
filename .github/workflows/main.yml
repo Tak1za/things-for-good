@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master
+env:
+  REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+  REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 jobs:
   build:
     name: Build
@@ -10,9 +13,6 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
-        env:
-          REACT_APP_FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-          REACT_APP_GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
       - name: Install Dependencies
         run: yarn install
       - name: Build
